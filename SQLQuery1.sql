@@ -1,6 +1,62 @@
- SELECT COUNT(*) AS Count
-FROM WizzardDeposits
-  
+CREATE TABLE[Countries] 
+(
+ID INT Primary Key IDENTITY,
+Name VARCHAR(10) NOT NULL
+)
 
- 
- 
+CREATE TABLE [Addresses]
+(
+ID INT Primary Key IDENTITY,
+StreetName VARCHAR(20) NOT NULL,
+StreetNumber INT NOT NULL,
+PostCode INT NOT NULL,
+City VARCHAR(25) NOT NULL,
+CountryId INT  FOREIGN KEY REFERENCES Countries(Id) NOT  NULL 
+)
+
+CREATE TABLE Vendors
+(
+ID INT Primary Key IDENTITY,
+Name Varchar (25) NOT NULL,
+NumberVAT Varchar (15) NOT NULL,
+AddressId INT  FOREIGN KEY REFERENCES Addresses(Id) NOT  NULL 
+)
+
+CREATE TABLE Clients
+(
+ID INT Primary Key IDENTITY,
+Name Varchar (25) NOT NULL,
+NumberVAT Varchar (15) NOT NULL,
+AddressId INT  FOREIGN KEY REFERENCES Addresses(Id) NOT  NULL 
+)
+
+CREATE TABLE Categories
+(
+ID INT Primary Key IDENTITY,
+Name Varchar (10) NOT NULL
+)
+
+CREATE TABLE Products
+(
+ID INT Primary Key IDENTITY,
+Name Varchar (35) NOT NULL,
+Price DECIMAL(2) NOT NULL,
+CategoryId INT FOREIGN KEY REFERENCES Categories(ID) NOT  NULL,
+VendorId INT FOREIGN KEY REFERENCES Vendors(Id) NOT  NULL
+)
+
+CREATE TABLE Invoices
+(
+Id INT Primary Key IDENTITY,
+Number INT UNIQUE NOT NULL,
+IssueDate DATE NOT NULL,
+DueDate DATE NOT NULL,
+Amount DECIMAL (2) NOT NULL,
+Currency VARCHAR(5) NOT NULL,
+ClientId INT FOREIGN KEY REFERENCES Clients (Id) NOT  NULL
+)
+CREATE TABLE ProductsClients
+(
+ProductId INT PRIMARY KEY FOREIGN KEY REFERENCES Products (Id) NOT  NULL,
+ClientId INT    FOREIGN KEY REFERENCES Products (Id) NOT  NULL
+)
