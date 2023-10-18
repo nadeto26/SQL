@@ -1,0 +1,6 @@
+.text
+{
+    background: url(Untitled.png) no-repeat center fixed;
+  background-size: cover;
+  filter: brightness(1500%);
+}
